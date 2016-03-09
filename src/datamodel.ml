@@ -20,6 +20,7 @@ module Attribute = struct
     name : string ;
     a_type : string ;
     optional : bool ;
+    list : bool ;
   }
   let t_of_j j = (
     let j = Br.objekt j in
@@ -27,7 +28,8 @@ module Attribute = struct
       {
 	name = Br.string (Br.field table "name") ;
 	a_type = Br.string (Br.field table "type") ;	
-	optional = Br.bool (Br.field table "option") ;
+	optional = Option.default false (Option.map Br.bool (Br.optfield table "option")) ;
+	list = Option.default false (Option.map Br.bool (Br.optfield table "list")) ;
       }
   )
 end

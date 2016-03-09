@@ -44,7 +44,7 @@ end;;
       pf "module %s = struct" m.S.name ;
       pf "\ttype t = {" ;
       List.iter ( fun a ->
-	pf "\t\t%s : %s %s;" a.Attribute.name a.Attribute.a_type (if a.Attribute.optional then "option" else "") ;
+	pf "\t\t%s : %s %s %s;" a.Attribute.name a.Attribute.a_type (if a.Attribute.list then "list" else "") (if a.Attribute.optional then "option" else "")  ;
       ) m.S.attributes ;
       pf "\t}" ;
       
@@ -52,10 +52,11 @@ end;;
       pf "\t\tlet table = Br.make_table (Br.objekt j) in" ;
       pf "\t\t{" ;
       List.iter ( fun a ->
+
 	if a.Attribute.optional then
-	  pf "\t\t\t%s = Option.map Br.%s (Br.optfield table \"%s\") ;" a.Attribute.name a.Attribute.a_type a.Attribute.name 
+	  pf "\t\t\t%s = Option.map (%s %s) (Br.optfield table \"%s\") ;" a.Attribute.name (if a.Attribute.list then "Br.list" else "" ) (browse_function_of_type a.Attribute.a_type data) a.Attribute.name 
 	else
-	  pf "\t\t\t%s = %s (Br.field table \"%s\") ;" a.Attribute.name (browse_function_of_type a.Attribute.a_type data)  a.Attribute.name 
+	  pf "\t\t\t%s = %s %s (Br.field table \"%s\") ;" a.Attribute.name  (if a.Attribute.list then "Br.list" else "" ) (browse_function_of_type a.Attribute.a_type data)  a.Attribute.name 
       ) m.S.attributes ;
       pf "\t\t}" ;
       pf "\t)" ;

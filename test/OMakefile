@@ -1,0 +1,29 @@
+.PHONY : test test1
+
+.DEFAULT: build
+
+USE_OCAMLFIND = true
+
+OCAMLPACKS[] =
+	extlib
+	cryptokit
+	unix
+	str
+	json-wheel
+
+NATIVE_ENABLED = true
+BYTE_ENABLED = false
+
+
+gen = $(prefix)/bin/ocamlstruct_to_json_ml
+
+
+test : $(gen)
+
+OCamlGeneratedFiles(data1.ml)
+
+data1.ml : data1.json $(gen)
+	$(gen) $< $@
+
+test : $(OCamlProgram test1,data1)
+

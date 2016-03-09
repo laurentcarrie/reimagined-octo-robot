@@ -1,0 +1,19 @@
+[
+{
+  "name": "A",
+  "attributes": [
+    { "name": "x", "type": "float", "option": false },
+    { "name": "s", "type": "string", "option": false },
+    { "name": "y", "type": "float", "option": true }
+  ]
+}
+,
+{
+  "name": "B",
+  "attributes": [
+    { "name": "a", "type": "A.t", "option": false },
+    { "name": "s", "type": "string", "option": false },
+    { "name": "y", "type": "float", "option": true }
+  ]
+}
+]

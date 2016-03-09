@@ -1,0 +1,22 @@
+.PHONY: build 
+
+.DEFAULT: build
+
+
+
+srcdir = $(absname $(dir $(CWD)))
+
+if $(not $(defined prefix))
+	prefix = $(srcdir)/install
+	export
+
+println($"prefix is : $(prefix)")
+
+.SUBDIRS: src test
+
+clean :
+	rm $(filter-proper-targets $(ls R, .))
+
+distant : build
+	auto-ftp --hostname $(host) --port $(port) --user laurent --script script.txt
+

@@ -1,0 +1,42 @@
+.PHONY: build clean install doc distant 
+
+.DEFAULT: build
+
+USE_OCAMLFIND = true
+
+OCAMLPACKS[] =
+	extlib
+	cryptokit
+	unix
+	str
+	json-wheel
+
+NATIVE_ENABLED = true
+BYTE_ENABLED = false
+
+#
+# Various options
+#
+OCAMLFLAGS    += -g -warn-error A
+# OCAMLCFLAGS   +=
+# OCAMLOPTFLAGS +=
+# OCAML_LINK_FLAGS +=
+# OCAML_BYTE_LINK_FLAGS +=
+# OCAML_NATIVE_LINK_FLAGS +=
+
+src[]=
+	main
+	datamodel
+	printstruct
+
+
+progname = ocamlstruct_to_json_ml
+prog = $(filter-out %.opt,$(OCamlProgram $(progname),$(src)))
+
+
+build : $(prefix)/bin/$(progname)
+
+mkdir -p $(prefix)/bin
+
+$(prefix)/bin/$(progname) : $(prog)
+	cp $< $@

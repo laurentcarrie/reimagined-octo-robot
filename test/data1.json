@@ -1,24 +1,34 @@
 [
-{
-  "name": "A",
-  "attributes": [
-    { "name": "x", "type": "float", "option": false },
-    { "name": "s", "type": "string", "option": false },
-    { "name": "y", "type": "float", "option": true } ,
-    { "name": "yl", "type": "float", "list":true },
-    { "name": "ss", "type": "string", "option":true,"list":true }
-  ]
-}
-,
-{
-  "name": "B",
-  "attributes": [
-    { "name": "a", "type": "A.t", "option": false,"list":false },
-    { "name": "a2", "type": "A.t", "option": false,"list":true },
-    { "name": "a3", "type": "A.t", "option": true,"list":false },
-    { "name": "a4", "type": "A.t", "option": true,"list":true },
-
-    { "name": "y", "type": "float", "option": true }
-  ]
-}
+  {
+    "name": "C",
+    "attributes": [
+      { "name": "Pique", "type": "string" },
+      { "name": "Coeur", "type": "string" },
+      { "name": "Carreau", "type": "string" },
+      { "name": "Trefle", "type": "string" }
+    ],
+    "sum": true
+  },
+  {
+    "name": "A",
+    "attributes": [
+      { "name": "x", "type": "float", "option": false },
+      { "name": "s", "type": "string", "option": false },
+      { "name": "y", "type": "float", "option": true },
+      { "name": "yl", "type": "float", "list": true },
+      { "name": "ss", "type": "string", "option": true, "list": true },
+      { "name": "couleur", "type": "C.t" }
+    ]
+  },
+  {
+    "name": "B",
+    "attributes": [
+      { "name": "a", "type": "A.t", "option": false, "list": false },
+      { "name": "a2", "type": "A.t", "option": false, "list": true },
+      { "name": "a3", "type": "A.t", "option": true, "list": false },
+      { "name": "a4", "type": "A.t", "option": true, "list": true },
+      { "name": "y", "type": "float", "option": true }
+    ]
+  }
 ]
+

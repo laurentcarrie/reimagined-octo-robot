@@ -25,10 +25,12 @@ let int_of_string s =
 let main () =
   let filename_in = Sys.argv.(1) in
   let data = Datamodel.T.t_of_j (Json_io.load_json filename_in) in
-  let filename_out = Sys.argv.(2) in
-  let fout = open_out filename_out in
-  let () = Printstruct.write_file fout data in
+  let module_name = Sys.argv.(2) in
+  let fout = open_out (module_name ^ ".ml") in
+  let fout_json = open_out (module_name ^ "_json.ml") in
+  let () = Printstruct.write_file module_name fout fout_json data in
   let () = close_out fout in
+  let () = close_out fout_json in
     ()
 
 

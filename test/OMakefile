@@ -22,8 +22,12 @@ test : $(gen)
 
 OCamlGeneratedFiles(data1.ml)
 
-data1.ml : data1.json $(gen)
-	$(gen) $< $@
+data1.ml data1_json.ml : data1.json $(gen)
+	$(gen) data1.json data1
 
-test : $(OCamlProgram test1,data1)
+data1_test-out.json : $(OCamlProgram test1,data1 data1_json test1) data1_test.json
+	./test1
 
+test1 : data1_test-out.json
+
+test : test1 

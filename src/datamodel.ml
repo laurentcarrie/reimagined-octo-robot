@@ -16,6 +16,7 @@ end;;
 let (//) = Filename.concat
 
 module Attribute = struct 
+
   type t = {
     name : string ;
     a_type : string ;
@@ -34,10 +35,11 @@ module Attribute = struct
   )
 end
 
-module S = struct
+module Module = struct
   type t = {
     name : string ;
     attributes : Attribute.t list ;
+    is_sum : bool ;
   }
   let t_of_j j = (
     let j = Br.objekt j in
@@ -45,17 +47,18 @@ module S = struct
     {
       name = Br.string (Br.field table "name") ;
       attributes = Br.list Attribute.t_of_j (Br.field table "attributes") ;
+      is_sum = Option.default false (Option.map Br.bool (Br.optfield table "sum")) ;
     }
   )
 end    
 
 module T = struct
   type t = {
-    modules : S.t list ;
+    modules : Module.t list ;
   }
   let t_of_j j = (
     { 
-      modules = Br.list S.t_of_j j ;
+      modules = Br.list Module.t_of_j j ;
     }
   )
 end

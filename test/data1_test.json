@@ -1,7 +1,25 @@
-{
-  "x": 123.0 ,
-  "s": "hello world",
-  "yl": [ 1.0 , 2.0 , 3.0 ],
-  "ss": [ "a", "b", "c", "d" ],
-  "couleur": "Coeur"
-}
+[
+  {
+    "couleur": { "ctor": "Coeur", "args": [ 3, true ] },
+    "x": 123.0,
+    "s": "hello world",
+    "yl": [ 1.0, 2.0, 3.0 ],
+    "ss": [ "a", "b", "c", "d" ]
+  },
+  {
+    "a2": [{
+      "couleur": { "ctor": "Coeur", "args": [ 3, true ] },
+      "x": 123.0,
+      "s": "hello world",
+      "yl": [ 1.0, 2.0, 3.0 ],
+      "ss": [ "a", "b", "c", "d" ]
+    }],
+    "a": {
+      "couleur": { "ctor": "Coeur", "args": [ 3, true ] },
+      "x": 123.0,
+      "s": "hello world",
+      "yl": [ 1.0, 2.0, 3.0 ],
+      "ss": [ "a", "b", "c", "d" ]
+    }
+  }
+]

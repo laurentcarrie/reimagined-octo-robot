@@ -4,6 +4,7 @@
 
 USE_OCAMLFIND = true
 
+OCAMLFLAGS+= -g
 OCAMLPACKS[] =
 	extlib
 	cryptokit
@@ -25,7 +26,10 @@ OCamlGeneratedFiles(data1.ml)
 data1.ml data1_json.ml : data1.json $(gen)
 	$(gen) data1.json data1
 
+setenv(OCAMLRUNPARAM,1)
+
 data1_test-out.json : $(OCamlProgram test1,data1 data1_json test1) data1_test.json
+	setenv(OCAMLRUNPARAM,1)
 	./test1
 
 test1 : data1_test-out.json

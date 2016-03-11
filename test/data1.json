@@ -1,11 +1,11 @@
 [
   {
     "name": "C",
-    "attributes": [
-      { "name": "Pique", "type": "string" },
-      { "name": "Coeur", "type": "string" },
-      { "name": "Carreau", "type": "string" },
-      { "name": "Trefle", "type": "string" }
+    "values": [
+      { "name": "Pique", "args": ["float"] },
+      { "name": "Coeur", "args": ["int","bool"] },
+      { "name": "Carreau", "args": ["string"] },
+      { "name": "Trefle", "args": ["string"] }
     ],
     "sum": true
   },

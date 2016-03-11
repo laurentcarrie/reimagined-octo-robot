@@ -4,6 +4,8 @@
 
 USE_OCAMLFIND = true
 
+OCAMLFLAGS+= -g
+
 OCAMLPACKS[] =
 	extlib
 	cryptokit

@@ -35,11 +35,10 @@ module Attribute = struct
   )
 end
 
-module Module = struct
+module Product = struct
   type t = {
     name : string ;
     attributes : Attribute.t list ;
-    is_sum : bool ;
   }
   let t_of_j j = (
     let j = Br.objekt j in
@@ -47,18 +46,54 @@ module Module = struct
     {
       name = Br.string (Br.field table "name") ;
       attributes = Br.list Attribute.t_of_j (Br.field table "attributes") ;
-      is_sum = Option.default false (Option.map Br.bool (Br.optfield table "sum")) ;
+    }
+  )
+end    
+
+module Sum = struct
+  type tt = {
+    ctor : string ;
+    args : string list ;
+  }
+  type t = {
+    name : string ;
+    ctors : tt list ;
+  }
+  let t_of_j j = (
+    let j = Br.objekt j in
+    let table = Br.make_table j in
+    {
+      name = Br.string (Br.field table "name") ;
+      ctors = (
+	let ctor_of_j j = (
+	  let table = Br.make_table (Br.objekt j) in
+	    {
+	      ctor = Br.string (Br.field table "name") ;
+	      args = Br.list Br.string (Br.field table "args")  ;
+	    }
+	) in
+	  Br.list ctor_of_j (Br.field table "values") 
+      );
     }
   )
 end    
 
 module T = struct
+  type tt = 
+      | P of Product.t 
+      | S of Sum.t 
   type t = {
-    modules : Module.t list ;
+    modules : tt list ;
   }
   let t_of_j j = (
     { 
-      modules = Br.list Module.t_of_j j ;
+      modules = Br.list ( 
+	fun j -> 
+	  try 
+	    P (Product.t_of_j j) 
+	  with 
+	    | _ -> S (Sum.t_of_j j)
+      ) j
     }
   )
 end
